@@ -2,11 +2,20 @@
 
 ### *Group:- Matrix Minds*
 
-## Table of Contents
-1. [Project Description](##project-description)
-2. [Reconstruction of Images with Missing Patch of different sizes using Matrix Factorization and gradient descent as optimization technique](##reconstruction-of-images-with-missing-patch-of-different-sizes-using-matrix-factorization-and-gradient-descent-as-optimization-technique)
+# Table of Contents
+1. [Project Description](#project-description)
+2. [Reconstruction of Images with Missing Patch of different sizes using Matrix Factorization and gradient descent as optimization technique](#reconstruction-of-images-with-missing-patch-of-different-sizes-using-matrix-factorization-and-gradient-descent-as-optimization-technique)
+    1. [Rectangular block of size NxN is assumed to be missing from the image](#1-rectangular-block-of-size-nxn-is-assumed-to-be-missing-from-the-image)
+    2. [Random subset of size NxN is assumed to be missing from the image](#2-random-subset-of-size-nxn-is-assumed-to-be-missing-from-the-image)
+    3. [PSNR (Peak Signal-to-Noise Ratio)](#psnr-peak-signal-to-noise-ratio)
+    4. [Root Mean Squared Error (RMSE)](#root-mean-squared-error-rmse)
+3. [Using Least Squares Function for Matrix Factorization](#using-least-squares-function-for-matrix-factorization)
+    1. [Rectangular block of size NxN is assumed to be missing from the image](#1-rectangular-block-of-size-nxn-is-assumed-to-be-missing-from-the-image-1)
+    2. [Random subset of size NxN is assumed to be missing from the image](#2-random-subset-of-size-nxn-is-assumed-to-be-missing-from-the-image-1)
+    3. [PSNR Graph of Randomly Removed Pixels and Missing Patch](#psnr-graph-of-randomly-removed-pixels-and-missing-patch)
+    4. [RMSE Graph of Randomly Removed Pixels and Missing Patch](#rmse-graph-of-randomly-removed-pixels-and-missing-patch)
 
-## Project Description:-
+# Project Description:-
 
 
 
@@ -208,80 +217,33 @@ $$
     - Also, the time taken by the alternating least square method is very high as compared to the gradient descent method. This is because the alternating least square method is not so efficient and it takes a lot of time to converge to the optimal solution as we seen during the lectures that gradient descent is very fast as compared to the alternating least square method.
 
     - However the iteration needed to converge are very less because in each iteration it gives most optimal W and H that fits the image with missing patch very well and there is very negligible decrease in loss after 2-3 iterations.  
-# Part - 4
 
-## Regions Containing Mainly Single Color
 
-### Vary rank (r) for r = [5, 10, 25, 50] and perform Gradient Descent till convergence.
-
-#### 1. r = 5    
-<img src="figures/part_4_im1.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 2. r = 10    
-<img src="figures/part_4_im2.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 3. r = 25    
-<img src="figures/part_4_im3.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 4. r = 50    
-<img src="figures/part_4_im4.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-- **Observation**: As we increase the rank (r) for matrix factorization, the reconstruction quality improves, as evidenced by the reduction in artifacts and the better preservation of the original image's structure and patterns. This is because a higher rank allows for a more accurate capture of the underlying structure and patterns in the image, leading to a more faithful reconstruction. Additionally, the PSNR and RMSE values improve as the rank increases, indicating better reconstruction quality and a closer match between the original and reconstructed images.
-
-### PSNR and RMSE for Regions Containing Mainly Single Color
+### PSNR Graph of Randomly Removed Pixels and Missing Patch
 
 <div style="text-align: center;">
-    <img src="figures/part_4_im1_psnr_rmse.png" alt="Reconstruction using RFF" width="700" height="300">
+    <img src="figures/LS_Patch_PSNR.png" alt="Reconstruction using RFF" width="400" height="300">
 </div>
 
-- **Observation**: The PSNR and RMSE plots show that as the rank (r) increases, the PSNR value improves, indicating better reconstruction quality. Similarly, the RMSE value decreases, reflecting a closer match between the original and reconstructed images. This suggests that a higher rank leads to a more accurate capture of the underlying structure and patterns in the image, resulting in a higher-quality reconstruction.
+- ***Observation:*** From the PSNR graph comparing randomly removed points and patch removed points, we observe that the PSNR value for randomly removed points is higher. As we increase the size of the removed points (NxN) from 20 to 80, the PSNR value decreases slightly. However, for patch removed points, the PSNR value for subsequent sizes is smaller compared to randomly removed points. Moreover, as we increase the size (N) of the removed patch, the PSNR value decreases significantly, indicating poorer reconstruction quality.
 
-- **Conclusion**:
+- ***Conclusion:***
+    1. Randomly removing points results in higher PSNR values, indicating better reconstruction quality compared to patch removal.
+    2. Increasing the size of the removed patch leads to a significant decrease in PSNR values compared to randomly removed points, suggesting a notable decline in reconstruction quality.
 
-    1. Increasing the rank (r) for matrix factorization leads to better reconstruction quality for regions containing mainly single colors.
-
-    2. Higher ranks result in improved PSNR and RMSE values, indicating a closer match between the original and reconstructed images and better preservation of the image's structure and patterns.
-
-## Regions Containing 2-3 Different Colors
-
-### Vary rank (r) for r = [5, 10, 25, 50] and perform Gradient Descent till convergence.
-
-#### 1. r = 5    
-<img src="figures/part_4_im5.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 2. r = 10    
-<img src="figures/part_4_im6.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 3. r = 25    
-<img src="figures/part_4_im7.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 4. r = 50    
-<img src="figures/part_4_im8.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-### PSNR and RMSE for Regions Containing 2-3 Different Colors
-
+### RMSE Graph of Randomly Removed Pixels and Missing Patch
 <div style="text-align: center;">
-    <img src="figures/part_4_im2_psnr_rmse.png" alt="Reconstruction using RFF" width="700" height="300">
+    <img src="figures/LS_Patch_RMSE.png" alt="Reconstruction using RFF" width="400" height="300">
 </div>
 
-## Regions Containing at Least 5 Different Colors
+- ***Observation:*** From the RMSE plots comparing patch (NxN) removed and randomly removed points (of size NxN), it's evident that the RMSE value for the patch removed is higher than for randomly removed points. As we increase the size (N) of the removed patch, the RMSE value increases significantly, indicating a substantial deterioration in reconstruction quality. On the other hand, for randomly removed points, the RMSE value remains almost constant as N increases. This suggests that the reconstruction quality for randomly removed points is relatively stable across different sizes, whereas the reconstruction quality for patch removed points deteriorates significantly as the size of the removed patch increases.
 
-### Vary rank (r) for r = [5, 10, 25, 50] and perform Gradient Descent till convergence.
+- ***Conclusion:***
+    1. Patch removal results in poorer reconstruction quality compared to randomly removed points.
+    2. Larger removed patch sizes lead to significantly higher RMSE values, emphasizing the detrimental effect of larger missing areas on reconstruction quality.
 
-#### 1. r = 5    
-<img src="figures/part_4_im9.png" alt="Randomly Removed 20x20" width="1200" height="300">
 
-#### 2. r = 10    
-<img src="figures/part_4_im10.png" alt="Randomly Removed 20x20" width="1200" height="300">
+## Image Resolution using Random Fourier Features and linear regression
 
-#### 3. r = 25    
-<img src="figures/part_4_im11.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-#### 4. r = 50    
-<img src="figures/part_4_im12.png" alt="Randomly Removed 20x20" width="1200" height="300">
-
-### PSNR and RMSE for Regions Containing at Least 5 Different Colors
-
-<div style="text-align: center;">
-    <img src="figures/part_4_im3_psnr_rmse.png" alt="Reconstruction using RFF" width="700" height="300">
-</div>
+### ***Random Fourier Features (RFF) and linear regression***
+- Random Fourier Features (RFF) approximate the feature map of a kernelized function by projecting input data using random Fourier basis functions. This enables efficient computation of complex kernel functions without explicitly evaluating them in the original space. In the context of image resolution, RFF can enhance and super-resolve images by predicting pixel values in between existing ones. By transforming the low-resolution image data, we can apply linear regression to estimate the values of the high-resolution image pixels.
